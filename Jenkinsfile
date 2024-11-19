@@ -1,7 +1,5 @@
 pipeline {
-
-    agent none // Don't use any global agent
-
+    agent none 
     stages {
 
         stage('Build') {
@@ -32,7 +30,7 @@ pipeline {
         }
         stage('Approval') {
             steps {
-                input message: 'Lanjutkan ke tahap Deploy? (Klik "Proceed" untuk melanjutkan ke tahap Deploy)'
+                input message: 'Lanjutkan ke tahap Deploy?'
             }
         }
         stage('Deploy') {
@@ -46,7 +44,7 @@ pipeline {
                 sh 'pip install pyinstaller'
                 sh 'pyinstaller --onefile sources/add2vals.py'
                 sleep time: 1, unit: 'MINUTES'
-                echo 'Pipeline has finished successfully.'
+                echo 'Success.'
             }
             post {
                 success {
